@@ -89,7 +89,22 @@ If not allowed, interrogate the payload to work out why:
 }
 ```
 
-## 3. Checking Status
+## 3. Updating the list of children and their pin
+
+You can make the same call as above but omit the **childId** parameter. This will not log any usage, but will return the current ability to use the device (always false with no childId) and the current list of children so you can show a child selector (and their child pins for validating access on your device).
+
+```yaml
+{
+   "allowed":false,
+   "children":[{
+      "id":12345,
+      "name":"Billy",
+      "pin":"1234"
+   }]
+}
+```
+
+## 4. Checking Status
 
 If you want to check if the device is still connected (in response to a user request perhaps). You can optionally use this endpoint:
 
