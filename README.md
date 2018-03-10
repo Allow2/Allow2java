@@ -16,20 +16,26 @@ to get you started:
 First, pair with Allow2 (this is using the username/password method):
 
 ```sh
-curl -H "Content-Type: application/json" -X POST -d \
-   '{"user": "*EMAIL*", "pass":"*PASSWORD*", "deviceToken": "jJ5GOIaJ028Ywt6K", "deviceName":"Test Device 1" }' https://api.allow2.com/api/pairDevice
+curl -H "Content-Type: application/json" -X POST -d @- https://api.allow2.com/api/pairDevice << EOF
+{
+   "user": "*EMAIL*",
+   "pass":"*PASSWORD*",
+   "deviceToken": "jJ5GOIaJ028Ywt6K",
+   "name":"Test Device 1"
+}
+EOF
 ```
 
 this returns a payload with information that you pass back to the app to persist for future use against the service:
 ```json
 {
   "status":"success",
-  "pairId":12345,
-  "token":"6742b233-de46-4c86-2ac9-7b9e5729f999",
+  "pairId":12345,                                     <- PAIR_ID
+  "token":"6742b233-de46-4c86-2ac9-7b9e5729f999",     <- PAIR_TOKEN
   "name":"Test Device 1",
-  "userId": 1234,
+  "userId": 1234,                                     <- USER_ID
   "children":[
-    { "id":682, "name":"Bob" },
+    { "id":682, "name":"Bob" },                       <- CHILD_ID
     { "id":691, "name":"Grace" },
     { "id":1795,"name":"Fred"}
   ]
@@ -38,4 +44,40 @@ this returns a payload with information that you pass back to the app to persist
 
 ## 2. Checking and Logging Usage
 
-Coming shortly
+Make a call like this every 20 seconds or so to check and log usage:
+
+```sh
+curl -H "Content-Type: application/json" -X POST -d @- https://service.allow2.com/serviceapi/check << EOF
+{
+    "userId": **USER_ID**,
+    "pairId": **PAIR_ID**,
+    "pairToken": "*PAIR_TOKEN*",
+    "deviceToken": "jJ5GOIaJ028Ywt6K",
+    "tz": "Australia/Brisbane",
+    "childId": *CHILD_ID*,
+    "activities": "[{ id: 3, log: true }]"         ** Ref: https://developer.allow2.com/ltr/activities
+}
+EOF
+```
+
+this returns a payload with success/failure and permissions/blocks/limits/etc.
+
+For allowed usage you can simply check for "allowed":
+```json
+{
+   allowed: true,
+   ...
+}
+```
+
+If not allowed, interrogate the payload to work out why:
+```json
+{
+   allowed: false,
+   ...
+}
+```
+
+## 3. Checking Status
+
+
