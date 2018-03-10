@@ -16,7 +16,8 @@ to get you started:
 First, pair with Allow2 (this is using the username/password method):
 
 ```sh
-curl -H "Content-Type: application/json" -X POST -d '{"user": "ALLOW2_ACCOUNT_EMAIL", "pass":"ALLOW2_ACCOUNT_PASS", "deviceToken": "jJ5GOIaJ028Ywt6K", "name":"Test Device 1" }' https://app.allow2.com:8443/api/pairDevice
+curl -H "Content-Type: application/json" -X POST -d \
+   '{"user": "*EMAIL*", "pass":"*PASSWORD*", "deviceToken": "jJ5GOIaJ028Ywt6K", "deviceName":"Test Device 1" }' https://api.allow2.com/api/pairDevice
 ```
 
 this returns a payload with information that you pass back to the app to persist for future use against the service:
