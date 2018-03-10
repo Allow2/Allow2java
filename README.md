@@ -32,15 +32,15 @@ EOF
 ```
 
 this returns a payload with information that you pass back to the app to persist for future use against the service:
-```json
+```yaml
 {
   "status":"success",
-  "pairId":12345,                                     ** PAIR_ID
-  "token":"6742b233-de46-4c86-2ac9-7b9e5729f999",     ** PAIR_TOKEN
+  "pairId":12345,                                     # PAIR_ID
+  "token":"6742b233-de46-4c86-2ac9-7b9e5729f999",     # PAIR_TOKEN
   "name":"Test Device 1",
-  "userId": 1234,                                     ** USER_ID
+  "userId": 1234,                                     # USER_ID
   "children":[
-    { "id":682, "name":"Bob" },                       ** CHILD_ID
+    { "id":682, "name":"Bob" },                       # CHILD_ID
     { "id":691, "name":"Grace" },
     { "id":1795,"name":"Fred"}
   ]
@@ -68,7 +68,7 @@ EOF
 this returns a payload with success/failure and permissions/blocks/limits/etc.
 
 For allowed usage you can simply check for "allowed":
-```json
+```yaml
 {
    "allowed": true,
    ...
@@ -76,7 +76,7 @@ For allowed usage you can simply check for "allowed":
 ```
 
 If not allowed, interrogate the payload to work out why:
-```json
+```yaml
 {
    "allowed": false,
    ...
