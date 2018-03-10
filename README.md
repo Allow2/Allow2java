@@ -9,7 +9,12 @@ refer to https://github.com/Allow2/Allow2.github.io/wiki for more details.
 
 # Curl examples
 
-to get you started:
+to get you started.
+
+These are based on a device token of: **jJ5GOIaJ028Ywt6K**
+
+Make your own device tokens here: https://developer.allow2.com
+
 
 ## 1. Pairing
 
@@ -30,12 +35,12 @@ this returns a payload with information that you pass back to the app to persist
 ```json
 {
   "status":"success",
-  "pairId":12345,                                     <- PAIR_ID
-  "token":"6742b233-de46-4c86-2ac9-7b9e5729f999",     <- PAIR_TOKEN
+  "pairId":12345,                                     ** PAIR_ID
+  "token":"6742b233-de46-4c86-2ac9-7b9e5729f999",     ** PAIR_TOKEN
   "name":"Test Device 1",
-  "userId": 1234,                                     <- USER_ID
+  "userId": 1234,                                     ** USER_ID
   "children":[
-    { "id":682, "name":"Bob" },                       <- CHILD_ID
+    { "id":682, "name":"Bob" },                       ** CHILD_ID
     { "id":691, "name":"Grace" },
     { "id":1795,"name":"Fred"}
   ]
@@ -49,8 +54,8 @@ Make a call like this every 20 seconds or so to check and log usage:
 ```sh
 curl -H "Content-Type: application/json" -X POST -d @- https://service.allow2.com/serviceapi/check << EOF
 {
-    "userId": **USER_ID**,
-    "pairId": **PAIR_ID**,
+    "userId": *USER_ID*,
+    "pairId": *PAIR_ID*,
     "pairToken": "*PAIR_TOKEN*",
     "deviceToken": "jJ5GOIaJ028Ywt6K",
     "tz": "Australia/Brisbane",
@@ -65,7 +70,7 @@ this returns a payload with success/failure and permissions/blocks/limits/etc.
 For allowed usage you can simply check for "allowed":
 ```json
 {
-   allowed: true,
+   "allowed": true,
    ...
 }
 ```
@@ -73,11 +78,13 @@ For allowed usage you can simply check for "allowed":
 If not allowed, interrogate the payload to work out why:
 ```json
 {
-   allowed: false,
+   "allowed": false,
    ...
 }
 ```
 
 ## 3. Checking Status
 
+If you want to check if the device is still connected (in response to a user request perhaps). You can optionally use this endpoint:
 
+**TBC**
