@@ -49,7 +49,10 @@ this returns a payload with information that you pass back to the app to persist
 
 ## 2. Checking and Logging Usage
 
-Make a call like this every 20 seconds or so to check and log usage:
+Make a call like this every 20 seconds or so to check and log usage.
+
+This example checks if the given child is currently allowed to be gaming (activity "3").
+The list of activities and their ids is available on the developer portal: https://developer.allow2.com/ltr/activities
 
 ```sh
 curl -H "Content-Type: application/json" -X POST -d @- https://service.allow2.com/serviceapi/check << EOF
@@ -60,7 +63,10 @@ curl -H "Content-Type: application/json" -X POST -d @- https://service.allow2.co
     "deviceToken": "jJ5GOIaJ028Ywt6K",
     "tz": "Australia/Brisbane",
     "childId": *CHILD_ID*,
-    "activities": "[{ id: 3, log: true }]"         ** Ref: https://developer.allow2.com/ltr/activities
+    "activities": [{
+      "id": 3,
+      "log": true
+    }]
 }
 EOF
 ```
